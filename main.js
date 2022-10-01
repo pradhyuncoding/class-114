@@ -1,0 +1,36 @@
+function preload(){
+
+}
+
+function setup(){
+    canvas = createcanvas(300, 300)
+    canvas.center()
+    video = createCapture(VIDEO);
+    video.size(300, 300);
+    video.hide();
+
+    poseNet = ml5.poseNet(video, modelLoaded);
+    posenet.on('pose', gotPoses);
+}
+
+function modelLoaded(){
+    console.log('PoseNet Is Initialized');
+}
+
+function gotPoses(results)
+{
+    if(results.length > 0)
+    {
+        console.log(results);
+        noseX = results[0].pose.nose.x;
+        noseY = results[0].pose.nose.y;
+    }
+}
+
+function draw(){
+
+}
+
+function save(){
+    save('myFilterImage.png')
+}
